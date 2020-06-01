@@ -16,13 +16,20 @@ def parse_args():
 
     Usage:
 
+    To get an expected price for a stock for a certain period, e.g. TSLA in 7 days:
+        python expected_price.py -s TSLA -d 7
+            Last close price: 835.0
+            TSLA IV: 55.6
+            TSLA expected move is +/- 64.2930242535785
+            High: 899.2930242535786, Low: 770.7069757464214
+
     """
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '-s',
         '--stock',
-        help="Generate PathMapping for a specific makelogical update")
+        help="Stock Symbol")
     parser.add_argument(
         '-d',
         '--days',
