@@ -4,6 +4,7 @@ import argparse
 import math
 import requests
 import yfinance as yf
+from datetime import datetime
 
 def parse_args():
     help_message = """
@@ -38,8 +39,9 @@ def parse_args():
 def get_expected_move(stock_name, days):
     stock = yf.Ticker(stock_name)
 
-    pre_close = float(stock.info['previousClose'])
-    print(f"Pre close price: {pre_close}")
+    hist = stock.history(period="1d")
+    pre_close = float(hist.Close[0])
+    print(f"Last close price: {pre_close}")
 
     response_content = str(requests.get(f'https://marketchameleon.com/Overview/{stock_name}/IV/').content)
     iv_str = response_content.split(f"{stock_name} IV Percentile Rank</h3>\\r\\n        <p>\\r\\n            ")[1].split("which is in the <strong>")[0]
